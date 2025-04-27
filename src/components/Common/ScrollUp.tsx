@@ -1,22 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 export default function ScrollUp() {
-  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      window.scrollTo(0, 0);
-    };
-    
-    router.events.on('routeChangeComplete', handleRouteChange);
-    
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router]);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // opsional: untuk animasi scroll halus
+    });
+  }, [pathname]);
 
   return null;
 }
